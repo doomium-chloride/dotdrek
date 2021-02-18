@@ -4,7 +4,7 @@
 
 It's a discord bot
 
-## Why is it GPL#
+## Why is it GPL3
 
 Because the template is GPL3
 
