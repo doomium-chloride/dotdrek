@@ -22,4 +22,6 @@ class UpdateAzurApi(BaseEvent):
             print("Updating")
             api.updater.update()
             message.message_me(client, "AzurApi updated")
+        else:
+            print("No update required for Azur Api")
 
