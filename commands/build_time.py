@@ -43,6 +43,12 @@ class Buildtime(BaseCommand):
 
         if(pool_string == None):
             pool_string = "unknown"
+        else:
+            try:
+                pool_string = ships.construction_types[pool_string]
+            except KeyError as e:
+                print("Unexpected value in buildtime's pool_string. string={0} error={1}".format(pool_string, e))
+                pool_string = "unknown"
 
         embed = discord.Embed(title="Build time = {0} from {1}".format(parse_time.minutes_to_hms(buildtime), pool_string))
         for ship in results:
