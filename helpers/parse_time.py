@@ -2,13 +2,13 @@ import re
 import numpy as np
 
 def hms_to_minutes(hour, minute, second):
-    return hour * 60 + minute + second / 60
+    return hour * 60 + minute + (second / 60)
 
 def minutes_to_hms(minutes):
     hour = int(minutes // 60)
     minutes -= hour * 60
     minute = int(np.floor(minutes))
-    second = int(np.floor(minutes - minute))
+    second = int(np.floor((minutes - minute) * 60))
     return "{0}:{1}:{2}".format(hour, minute, second)
 
 def time_str_to_minutes(time_str):
@@ -86,12 +86,17 @@ def parse_string_time(string):
         return parse_colon_string(string)
     elif ";" in string:
         return parse_colon_string(string, ";")
-    else:
+    elif "h" in string or "m" in string:
         return parse_hms_string(string)
+    elif "," in string:
+        return parse_colon_string(string, ",")
+    elif " " in string:
+        return parse_colon_string(string, " ")
+    else:
+        return parse_colon_string(string, ".")
     
 
 def parse_time(string):
-    string = re.sub(" ", "", string)
     if string.isnumeric():
         time = float(string)
         return parse_numeric_time(time)

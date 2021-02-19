@@ -32,9 +32,29 @@ def make_buildtime_comparer(buildtime):
         return abs(time_str_to_minutes(build) - buildtime)
     return comparer
 
-def get_ships_with_buildtime(buildtime, tolerance):
+def get_build_pool(text):
+    pool = text.lower()
+    if pool.startswith("l") :
+        return "light"
+    if pool.startswith("h") :
+        return "heavy"
+    if pool.startswith("s") or pool.startswith("a"):
+        return "aviation"
+    if pool.startswith("e"):
+        return "limited"
+    return None
+
+def ships_by_construction_pool(ships, pool):
+    if pool == None:
+        return ships
+    build_pool = get_build_pool(pool)
+    if build_pool == None:
+        return ships
+    return filter(lambda ship: ship['construction']['availableIn'][build_pool], ships)
+
+def get_ships_with_buildtime(buildtime, tolerance, pool = None):
     api = AzurAPI()
-    ships = api.getAllShips()
+    ships = ships_by_construction_pool(api.getAllShips(), pool)
     comparer = make_buildtime_comparer(buildtime)
     ship_filter = lambda ship: comparer(ship) < tolerance
     filtered_ships = list(filter(ship_filter, ships))

@@ -8,16 +8,16 @@ import discord
 # but in lowercase
 
 # So, a command class named Random will generate a 'random' command
-class Buildtime(BaseCommand):
+class Time(BaseCommand):
 
     def __init__(self):
         # A quick description for the help message
-        description = "Gives a list of what ships you might have built from a specific build pool"
+        description = "Gives a list of what ships you might have built"
         # A list of parameters that the command will take as input
         # Parameters will be separated by spaces and fed to the 'params' 
         # argument in the handle() method
         # If no params are expected, leave this list empty or set it to None
-        params = ["build pool", "time"]
+        params = ["time"]
         super().__init__(description, params)
 
     # Override the handle() method
@@ -29,22 +29,15 @@ class Buildtime(BaseCommand):
         # 'message' is the discord.py Message object for the command to handle
         # 'client' is the bot Client object
 
-        pool = params[0]
-
-        string = ' '.join(params[1:])
+        string = ' '.join(params)
 
         buildtime = parse_time.parse_time(string)
 
         tolerance = 5
 
-        results = ships.get_ships_with_buildtime(buildtime, tolerance, pool)
+        results = ships.get_ships_with_buildtime(buildtime, tolerance)
 
-        pool_string = ships.get_build_pool(pool)
-
-        if(pool_string == None):
-            pool_string = "unknown"
-
-        embed = discord.Embed(title="Build time = {0} from {1}".format(parse_time.minutes_to_hms(buildtime), pool_string))
+        embed = discord.Embed(title="Build time = {0}".format(parse_time.minutes_to_hms(buildtime)))
         for ship in results:
             name_string = "{0} -- {1}".format(ships.get_ship_name(ship), ship['rarity'])
             value_string = "{0} -- {1}".format(ships.get_ship_construction_time(ship), ships.get_ship_construction_string(ship))
