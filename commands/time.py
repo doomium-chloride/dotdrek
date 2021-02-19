@@ -1,6 +1,6 @@
 from commands.base_command  import BaseCommand
 import numpy as np
-from helpers import parse_time, ships
+from helpers import parse_time, ships, constants
 import discord
 
 # Your friendly example event
@@ -37,7 +37,7 @@ class Time(BaseCommand):
 
         results = ships.get_ships_with_buildtime(buildtime, tolerance)
 
-        embed = discord.Embed(title="Build time = {0}".format(parse_time.minutes_to_hms(buildtime)))
+        embed = discord.Embed(title="Build time = {0}".format(parse_time.minutes_to_hms(buildtime)), color=constants.SILVER_HEX)
         for ship in results:
             name_string = "{0} -- {1}".format(ships.get_ship_name(ship), ship['rarity'])
             value_string = "{0} -- {1}".format(ships.get_ship_construction_time(ship), ships.get_ship_construction_string(ship))

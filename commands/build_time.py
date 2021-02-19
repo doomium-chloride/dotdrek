@@ -1,6 +1,6 @@
 from commands.base_command  import BaseCommand
 import numpy as np
-from helpers import parse_time, ships
+from helpers import parse_time, ships, constants
 import discord
 
 # Your friendly example event
@@ -50,7 +50,7 @@ class Buildtime(BaseCommand):
                 print("Unexpected value in buildtime's pool_string. string={0} error={1}".format(pool_string, e))
                 pool_string = "unknown"
 
-        embed = discord.Embed(title="Build time = {0} from {1}".format(parse_time.minutes_to_hms(buildtime), pool_string))
+        embed = discord.Embed(title="Build time = {0} from {1}".format(parse_time.minutes_to_hms(buildtime), pool_string), color=constants.SILVER_HEX)
         for ship in results:
             name_string = "{0} -- {1}".format(ships.get_ship_name(ship), ship['rarity'])
             value_string = "{0} -- {1}".format(ships.get_ship_construction_time(ship), ships.get_ship_construction_string(ship))
