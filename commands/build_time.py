@@ -1,6 +1,6 @@
 from commands.base_command  import BaseCommand
 import numpy as np
-from helpers import parse_time, ships, constants
+from helpers import parse_time, ships, constants, embeds
 import discord
 
 # Your friendly example event
