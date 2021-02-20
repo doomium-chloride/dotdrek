@@ -102,4 +102,7 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+#azurapi data
+/azurapi_data
+
 # End of https://www.gitignore.io/api/python
