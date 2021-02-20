@@ -1,4 +1,5 @@
 import settings
+import discord
 
 # Base command class
 # Do not modify!
@@ -18,5 +19,5 @@ class BaseCommand:
         self.description = desc
 
     # Every command must override this method
-    async def handle(self, params, message, client):
+    async def handle(self, params: list[str], message: discord.Message, client: discord.Client):
         raise NotImplementedError  # To be defined by every command

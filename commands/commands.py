@@ -18,6 +18,5 @@ class Commands(BaseCommand):
         for cmd in sorted(COMMAND_HANDLERS.items()):
             if(not cmd[1].secret):
                 msg += "\n" + cmd[1].description
-            print(cmd[1].description)
 
         await message.channel.send(msg)
