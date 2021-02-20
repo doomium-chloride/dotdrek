@@ -42,7 +42,7 @@ class Chat(BaseCommand):
 
         guilds = client.guilds
         for guild in guilds:
-            if guild.name.lower() == server_name.lower():
+            if guild.name.replace(" ", "_") == server_name:
                 server = guild
                 break
         if server == None:
