@@ -6,7 +6,7 @@ async def update_azurapi(client):
     need_update = api.updater.checkForNewUpdate()
     if any(need_update):
         print("Updating")
+        await message_me(client, "AzurApi updating")
         api.updater.update()
-        await message_me(client, "AzurApi updated")
     else:
         print("No update required for Azur Api")
