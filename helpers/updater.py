@@ -1,4 +1,5 @@
 from .message import message_me
+from azurlane.azurapi import AzurAPI
 
 async def update_azurapi(client):
     api = AzurAPI()

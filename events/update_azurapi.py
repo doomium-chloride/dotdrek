@@ -1,5 +1,4 @@
 from events.base_event      import BaseEvent
-from azurlane.azurapi       import AzurAPI
 from helpers                import message, updater
 
 
