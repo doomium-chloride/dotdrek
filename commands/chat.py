@@ -51,7 +51,7 @@ class Chat(BaseCommand):
         channel: discord.TextChannel = None
 
         for guild_channel in server.channels:
-            if guild_channel.name == channel_name:
+            if guild_channel.name(" ", "_") == channel_name:
                 channel = guild_channel
         
         if channel == None:
