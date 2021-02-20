@@ -59,5 +59,5 @@ class Chat(BaseCommand):
         
         try:
             await channel.send(msg)
-        except AttributeError as e:
+        except Exception as e:
             await message.message_me(client, "Failed to send message '{0}' error is {1}".format(msg, e))
