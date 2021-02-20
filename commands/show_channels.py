@@ -47,6 +47,6 @@ class ShowChannels(BaseCommand):
             return await message.message_me(client, "Server named '{0}' not found".format(server_name))
         
         channel_names = [channel.name for channel in server.channels]
-        msc = ', '.join(channel_names)
+        msg = ', '.join(channel_names)
         await message.message_me(client, msg)
 
