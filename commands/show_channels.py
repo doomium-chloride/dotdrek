@@ -1,8 +1,7 @@
 from commands.base_command  import BaseCommand
 from utils                  import get_emoji
 from random                 import randint
-from helpers.constants      import MY_USER_ID
-from helpers.message        import message_me
+from helpers                import constants, message
 
 
 # Your friendly example event
@@ -24,7 +23,7 @@ class ShowChannels(BaseCommand):
 
     # Override the handle() method
     # It will be called every time the command is received
-    async def handle(self, params, message, client):
+    async def handle(self, params, message_obj, client):
         # 'params' is a list that contains the parameters that the command 
         # expects to receive, t is guaranteed to have AT LEAST as many
         # parameters as specified in __init__
