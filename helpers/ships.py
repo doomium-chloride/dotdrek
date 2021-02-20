@@ -1,5 +1,6 @@
 from azurlane.azurapi import AzurAPI
 from .parse_time import time_str_to_minutes
+import difflib
 
 construction_types = {
     "light": "light",
@@ -63,3 +64,28 @@ def get_ships_with_buildtime(buildtime, tolerance, pool = None):
 
 def get_ship_name(ship, lang = "en"):
     return ship['names'][lang]
+
+def get_all_ship_names():
+    api = AzurAPI()
+    ships = api.getAllShips()
+    names = []
+    for ship in ships:
+        ship_names = ship['names'].items()
+        for key, name in ship_names:
+            names.append(name)
+    return names
+    
+
+def get_closest_matching_ship(name: str):
+    api = AzurAPI()
+    try:
+        return api.getShipByName(name)
+    except:
+        names = get_all_ship_names()
+        matches = difflib.get_close_matches(name, names, n=1, cutoff=0.1)
+        if len(matches) <= 0:
+            return None
+        else:
+            ship_name = matches[0]
+            print("ship name match!!! === " + ship_name)
+            return api.getShipByName(ship_name)

@@ -1,6 +1,6 @@
 from commands.base_command  import BaseCommand
 import numpy as np
-from helpers import parse_time, ships, constants
+from helpers import parse_time, ships, constants, embeds
 import discord
 
 # Your friendly example event
@@ -28,19 +28,16 @@ class Time(BaseCommand):
         # parameters as specified in __init__
         # 'message' is the discord.py Message object for the command to handle
         # 'client' is the bot Client object
+        async with message.channel.typing():
+            string = ' '.join(params)
 
-        string = ' '.join(params)
+            buildtime = parse_time.parse_time(string)
 
-        buildtime = parse_time.parse_time(string)
+            tolerance = 5
 
-        tolerance = 5
+            results = ships.get_ships_with_buildtime(buildtime, tolerance)
 
-        results = ships.get_ships_with_buildtime(buildtime, tolerance)
+            embed = discord.Embed(title="Build time = {0}".format(parse_time.minutes_to_hms(buildtime)), color=constants.SILVER_HEX)
+            embeds.populate_build_time(embed, results)
 
-        embed = discord.Embed(title="Build time = {0}".format(parse_time.minutes_to_hms(buildtime)), color=constants.SILVER_HEX)
-        for ship in results:
-            name_string = "{0} -- {1}".format(ships.get_ship_name(ship), ship['rarity'])
-            value_string = "{0} -- {1}".format(ships.get_ship_construction_time(ship), ships.get_ship_construction_string(ship))
-            embed.add_field(name=name_string, value=value_string, inline=False)
-
-        await message.channel.send(embed=embed)
+            await message.channel.send(embed=embed)

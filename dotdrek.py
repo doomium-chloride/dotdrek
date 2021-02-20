@@ -8,7 +8,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from events.base_event              import BaseEvent
 from events                         import *
 from multiprocessing                import Process
-from helpers import message
+from helpers import message, updater
 
 # Set to remember if the bot is already running, since on_ready may be called
 # more than once on reconnects
@@ -54,6 +54,7 @@ def main():
         sched.start()
         print(f"{n_ev} events loaded", flush=True)
         await message.message_me(client, ".drek online!")
+        await updater.update_azurapi(client)
 
     # The message handler for both new message and edits
     async def common_handle_message(message):

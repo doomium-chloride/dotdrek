@@ -1,6 +1,6 @@
 from events.base_event      import BaseEvent
 from azurlane.azurapi       import AzurAPI
-from helpers                import message
+from helpers                import message, updater
 
 
 # Your friendly example event
@@ -15,13 +15,5 @@ class UpdateAzurApi(BaseEvent):
     # Override the run() method
     # It will be called once every {interval_minutes} minutes
     async def run(self, client):
-        api = AzurAPI()
-        print("Checking for AzurApi updates...")
-        need_update = api.updater.checkForNewUpdate()
-        if any(need_update):
-            print("Updating")
-            api.updater.update()
-            message.message_me(client, "AzurApi updated")
-        else:
-            print("No update required for Azur Api")
+        await updater.update_azurapi(client)
 

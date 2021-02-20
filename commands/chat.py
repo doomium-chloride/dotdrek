@@ -46,7 +46,7 @@ class Chat(BaseCommand):
                 server = guild
                 break
         if server == None:
-            return await message.message_me("Server named '{0}' not found".format(server_name))
+            return await message.message_me(client, "Server named '{0}' not found".format(server_name))
         
         channel: discord.TextChannel = None
 
@@ -55,7 +55,7 @@ class Chat(BaseCommand):
                 channel = guild_channel
         
         if channel == None:
-            return await message.message_me("Channel named '{0}' not found in server: {1}".format(channel_name, server_name))
+            return await message.message_me(client, "Channel named '{0}' not found in server: {1}".format(channel_name, server_name))
         
         try:
             await channel.send(msg)
