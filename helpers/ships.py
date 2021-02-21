@@ -72,7 +72,7 @@ def get_all_ship_names():
     for ship in ships:
         ship_names = ship['names'].items()
         for key, name in ship_names:
-            names.append(name)
+            names.append(name.lower())
     return names
     
 
@@ -82,7 +82,7 @@ def get_closest_matching_ship(name: str):
         return api.getShipByName(name)
     except:
         names = get_all_ship_names()
-        matches = difflib.get_close_matches(name, names, n=1, cutoff=0.1)
+        matches = difflib.get_close_matches(name.lower(), names, n=1, cutoff=0.1)
         if len(matches) <= 0:
             return None
         else:
