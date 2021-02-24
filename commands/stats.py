@@ -63,6 +63,6 @@ class Stats(BaseCommand):
 
         build_chance_percentage = np.round(build_chance_decimal * 100, 4)
 
-        msg = "Chance to build a ship at {0}% build rate is {1}%".format(np.round(build_rate * 100, 4), build_chance_percentage)
+        msg = "With {0} builds, the chance to build a {1}% build rate ship is {2}%".format(builds, np.round(build_rate * 100, 4), build_chance_percentage)
 
         await message.channel.send(msg)
