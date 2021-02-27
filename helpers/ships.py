@@ -90,15 +90,19 @@ def get_closest_matching_ship(name: str):
             print("ship name match!!! === " + ship_name)
             return api.getShip(ship_name)
 
-
-def approximate_ship_name(name, names):
-
+def filter_name(name):
+    name = name.lower()
+    
     if name == "fdg":
         return "Friedrich der Große"
     if name == "kgv":
         return "King George V"
     if name == 'kasumi':
         return 10063
+        
+    return name
+
+def approximate_ship_name(name, names):
 
     matches = difflib.get_close_matches(name.lower(), names, n=1, cutoff=0.1);
 
