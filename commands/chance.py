@@ -8,7 +8,7 @@ import numpy as np
 # but in lowercase
 
 # So, a command class named Random will generate a 'random' command
-class Stats(BaseCommand):
+class Chance(BaseCommand):
 
     def __init__(self):
         # A quick description for the help message
