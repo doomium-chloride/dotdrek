@@ -79,7 +79,7 @@ def get_all_ship_names():
 def get_closest_matching_ship(name: str):
     api = AzurAPI()
     try:
-        return api.getShip(name)
+        return api.getShip(filter_name(name))
     except:
         names = get_all_ship_names()
         match = approximate_ship_name(name.lower(), names)
@@ -99,7 +99,7 @@ def filter_name(name):
         return "King George V"
     if name == 'kasumi':
         return 10063
-        
+
     return name
 
 def approximate_ship_name(name, names):
