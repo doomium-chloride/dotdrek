@@ -98,7 +98,7 @@ def filter_name(name):
     if name == "kgv":
         return "King George V"
     if name == 'kasumi':
-        return 10063
+        return "10063"
 
     return name
 
