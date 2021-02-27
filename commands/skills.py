@@ -32,7 +32,7 @@ class Skills(BaseCommand):
 
         async with message.channel.typing():
 
-            ship_name = params[0]
+            ship_name = ' '.join(params)
 
             ship = ships.get_closest_matching_ship(ship_name)
 
