@@ -82,7 +82,7 @@ def get_closest_matching_ship(name: str):
         return api.getShipByName(name)
     except:
         names = get_all_ship_names()
-        match = approximate_ship(name.lower())
+        match = approximate_ship(name.lower(), names)
         if match == None:
             return None
         else:
@@ -91,7 +91,7 @@ def get_closest_matching_ship(name: str):
             return api.getShipByName(ship_name)
 
 
-def approximate_ship(name):
+def approximate_ship(name, names):
 
     if name == "fdg":
         return "Friedrich der Große"
