@@ -1,5 +1,6 @@
 from azurlane.azurapi import AzurAPI
 from .parse_time import time_str_to_minutes
+from FuzzySearchPy import FuzzySearch
 import difflib
 
 construction_types = {
@@ -81,14 +82,11 @@ def get_closest_matching_ship(name: str):
     try:
         return api.getShip(filter_name(name))
     except:
-        names = get_all_ship_names()
-        match = approximate_ship_name(name.lower(), names)
-        if match == None:
+        matches = find_ship(name)
+        if len(matches) < 1:
             return None
         else:
-            ship_name = match
-            print("ship name match!!! === " + ship_name)
-            return api.getShip(ship_name)
+            return matches[0]
 
 def filter_name(name):
     name = name.lower()
@@ -110,3 +108,11 @@ def approximate_ship_name(name, names):
             return None
     else:
         return matches[0]
+
+def find_ship(name):
+    api = AzurAPI()
+    ships = api.getAllShips()
+    keys = ["names.code", "names.en", "names.jp", "names.cn", "names.kr"]
+    options = { "sort": True, "caseSensitive": False }
+    searcher = FuzzySearch(ships, keys, options)
+    return searcher.search(name)
