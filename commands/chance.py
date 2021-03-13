@@ -41,7 +41,7 @@ class Chance(BaseCommand):
                                       "Build rate must be a decimal or percentage and builds must be a positive number")
             return
 
-        if build_rate > 1:
+        if build_rate >= 0.5:
             build_rate = build_rate / 100
         
         if build_rate > 1:
