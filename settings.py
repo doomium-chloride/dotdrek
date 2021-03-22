@@ -3,7 +3,7 @@ from decouple import config
 
 # The prefix that will be used to parse commands.
 # It doesn't have to be a single character!
-COMMAND_PREFIX = ".drek "
+COMMAND_PREFIX = ".drek"
 
 # The bot token. Keep this secret!
 BOT_TOKEN = config('TOKEN')

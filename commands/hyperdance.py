@@ -7,11 +7,11 @@ import discord
 # but in lowercase
 
 # So, a command class named Random will generate a 'random' command
-class Ass(BaseCommand):
+class Hyperdance(BaseCommand):
 
     def __init__(self):
         # A quick description for the help message
-        description = "drek's ass"
+        description = "drek hyperdance"
         # A list of parameters that the command will take as input
         # Parameters will be separated by spaces and fed to the 'params' 
         # argument in the handle() method
@@ -32,4 +32,4 @@ class Ass(BaseCommand):
         # file = discord.File('Assets/Images/DrekAss.png')
         # await message.channel.send(file=file)
 
-        await message.channel.send("https://cdn.discordapp.com/attachments/574086416192110595/810337233961222185/DrekAss.png")
+        await message.channel.send("https://media.discordapp.net/attachments/468719321087082516/817816231435960351/image0.gif")

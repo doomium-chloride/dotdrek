@@ -9,7 +9,7 @@ class BaseCommand:
         self.params = params
         self.secret = secret
 
-        desc = f"**{settings.COMMAND_PREFIX}{self.name}**"
+        desc = f"**{settings.COMMAND_PREFIX} {self.name}**"
 
         if self.params:
             desc += " " + " ".join(f"*<{p}>*" for p in params)
