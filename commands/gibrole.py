@@ -29,6 +29,9 @@ class GibRole(BaseCommand):
         # 'message' is the discord.py Message object for the command to handle
         # 'client' is the bot Client object
 
+        if message.guild == None or message.guild.id != self.server:
+            return
+
         member = message.author
         get_role = message.guild.get_role
 
