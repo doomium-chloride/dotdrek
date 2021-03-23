@@ -32,10 +32,12 @@ class GibRole(BaseCommand):
         if message.guild == None or message.guild.id != self.server:
             return
 
+        role_name = ' '.join(params)
+
         member = message.author
         get_role = message.guild.get_role
 
-        role_id = DREK_ROLES.get(params[0])
+        role_id = DREK_ROLES.get(role_name)
 
         if role_id == None:
             return
