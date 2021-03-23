@@ -4,10 +4,11 @@ import settings
 # Do not modify!
 class BaseCommand:
 
-    def __init__(self, description, params, secret = False):
+    def __init__(self, description, params, secret = False, server = None):
         self.name = type(self).__name__.lower()
         self.params = params
         self.secret = secret
+        self.server = server
 
         desc = f"**{settings.COMMAND_PREFIX} {self.name}**"
 
