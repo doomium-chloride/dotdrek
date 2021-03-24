@@ -17,7 +17,7 @@ class GibRole(BaseCommand):
         # Parameters will be separated by spaces and fed to the 'params' 
         # argument in the handle() method
         # If no params are expected, leave this list empty or set it to None
-        params = ["role name"]
+        params = ["role names = {0}".format([role for role in DREK_ROLES.keys()])]
         super().__init__(description, params, server=DREK_CULT_ID)
 
     # Override the handle() method
