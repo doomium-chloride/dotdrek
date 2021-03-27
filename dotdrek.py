@@ -81,7 +81,9 @@ def main():
         await common_handle_message(after)
 
     # Finally, set the bot running
-    client.run(settings.BOT_TOKEN)
+    while True:
+        client.run(settings.BOT_TOKEN)
+    
 
 ###############################################################################
 
