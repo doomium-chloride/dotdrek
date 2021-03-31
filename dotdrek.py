@@ -59,7 +59,7 @@ def main():
     # The message handler for both new message and edits
     async def common_handle_message(message):
         text = message.content
-        if text.startswith(settings.COMMAND_PREFIX):
+        if text.lower().startswith(settings.COMMAND_PREFIX):
             cmd_split = text[len(settings.COMMAND_PREFIX):].split()
             if len(cmd_split) <= 0:
                 await message_handler.handle_command("commands", 
