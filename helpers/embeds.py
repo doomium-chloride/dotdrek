@@ -13,7 +13,7 @@ def show_servers(embed, servers):
     for server in servers:
         server_name = server.name
         server_id = server.id
-        embed.add_field(name=server_name, value=server_id, inline=False)
+        embed.add_field(name=server_name, value=server_id, inline=True)
 
 def split_list(array, limit):
     return [array[i:i+limit] for i in range(0, len(array), limit)]
