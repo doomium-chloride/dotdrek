@@ -1,7 +1,8 @@
-from commands.base_command  import BaseCommand
+from commands.base_command import BaseCommand
 import numpy as np
 from helpers import parse_time, ships, constants, embeds
 import discord
+
 
 # Your friendly example event
 # Keep in mind that the command name will be derived from the class name
@@ -33,11 +34,27 @@ class Time(BaseCommand):
 
             buildtime = parse_time.parse_time(string)
 
-            tolerance = 5
+            tolerance = buildtime * 0.03
 
             results = ships.get_ships_with_buildtime(buildtime, tolerance)
 
-            embed = discord.Embed(title="Build time = {0}".format(parse_time.minutes_to_hms(buildtime)), color=constants.SILVER_HEX)
-            embeds.populate_build_time(embed, results)
+            split_results = embeds.split_list(results, 25)
 
-            await message.channel.send(embed=embed)
+            if len(split_results) == 1:
+                embed = discord.Embed(title="Build time = {0}".format(parse_time.minutes_to_hms(buildtime)),
+                                      color=constants.SILVER_HEX)
+                embeds.populate_build_time(embed, results)
+
+                await message.channel.send(embed=embed)
+            elif len(split_results) <= 0:
+                await message.channel.send("No ships found for time {0}".format(parse_time.minutes_to_hms(buildtime)))
+            else:
+                pt = 1
+                for part_result in split_results:
+                    embed = discord.Embed(title="part{0}: Build time = {1}".format(pt,
+                                                                                parse_time.minutes_to_hms(buildtime)),
+                                          color=constants.SILVER_HEX)
+                    embeds.populate_build_time(embed, part_result)
+
+                    await message.channel.send(embed=embed)
+                    pt += 1

@@ -1,8 +1,8 @@
 from commands.base_command  import BaseCommand
-from utils                  import get_emoji
-from random                 import randint
 from helpers.constants      import MY_USER_ID
-from helpers.message        import message_me
+from helpers.message        import message_me_embed
+from helpers                import embeds
+import discord
 
 
 # Your friendly example event
@@ -33,8 +33,10 @@ class ShowServers(BaseCommand):
 
         if message.author.id != MY_USER_ID:
             return
+        servers = client.guilds
 
-        guilds_names = [guild.name for guild in client.guilds]
-        msg = ', '.join(guilds_names)
-
-        await message_me(client, msg)
+        split_list = embeds.split_list(servers, 25)
+        for server_list in split_list:
+            embed = discord.Embed(title="Servers")
+            embeds.show_servers(embed, server_list)
+            await message_me_embed(client, embed)

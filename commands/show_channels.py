@@ -1,7 +1,8 @@
 from commands.base_command  import BaseCommand
 from utils                  import get_emoji
 from random                 import randint
-from helpers                import constants, message
+from helpers                import constants, message, embeds
+import discord
 
 
 # Your friendly example event
@@ -34,19 +35,21 @@ class ShowChannels(BaseCommand):
             print("{0} tried to use this secret function".format(message_obj.author.display_name))
             return;
 
-        server_name = params[0]
+        server_id = params[0]
 
         server: discord.Guild = None
 
         guilds = client.guilds
         for guild in guilds:
-            if guild.name.replace(" ", "_") == server_name:
+            if str(guild.id) == server_id:
                 server = guild
                 break
         if server == None:
-            return await message.message_me(client, "Server named '{0}' not found".format(server_name))
-        
-        channel_names = [channel.name for channel in server.channels]
-        msg = ', '.join(channel_names)
-        await message.message_me(client, msg)
+            return await message.message_me(client, "Server with id '{0}' not found".format(server_id))
+
+        split_list = embeds.split_list(server.channels, 25)
+        for channel_list in split_list:
+            embed = discord.Embed(title="Channels in {0}".format(server.name))
+            embeds.show_servers(embed, channel_list)
+            await message.message_me_embed(client, embed)
 

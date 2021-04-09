@@ -105,4 +105,7 @@ venv.bak/
 #azurapi data
 /azurapi_data
 
+#pycharm
+.idea
+
 # End of https://www.gitignore.io/api/python

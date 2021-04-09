@@ -1,12 +1,14 @@
 from commands.base_command  import BaseCommand
 import discord
+from helpers.embeds import list_options
 
 
 renown = {
     "jihadtrain": "https://cdn.discordapp.com/attachments/728445732964794379/813291838719000636/3RZFC-jihadtrain.webm",
     "devbp": "https://cdn.discordapp.com/attachments/574086416192110595/826733996918177832/5PLU1-devbp.png",
-    "planeloadout": "https://cdn.discordapp.com/attachments/574086416192110595/826734165922676786/C1QRP-cvloadout.png",
-    "chadtydal": "https://cdn.discordapp.com/attachments/574086416192110595/826734491027505162/KA1DR-unknown.png"
+    "cvloadout": "https://cdn.discordapp.com/attachments/574086416192110595/826734165922676786/C1QRP-cvloadout.png",
+    "chadtydal": "https://cdn.discordapp.com/attachments/574086416192110595/826734491027505162/KA1DR-unknown.png",
+    "cvav": "https://cdn.discordapp.com/attachments/574086416192110595/830015582358601738/image0.png"
 }
 
 
@@ -42,6 +44,12 @@ class Renown(BaseCommand):
 
         command = ' '.join(params);
 
-        reply = renown.get(command, "renown command {0} not found".format(command))
+        reply = renown.get(command, None)
 
-        await message.channel.send(reply)
+        if reply != None:
+            await message.channel.send(reply)
+        else:
+            options = list(renown.keys())
+            embed = discord.Embed(title="renown bot commands")
+            list_options(embed, options)
+            await message.channel.send(embed=embed)

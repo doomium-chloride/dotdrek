@@ -34,28 +34,28 @@ class Chat(BaseCommand):
             print("{0} tried to use this secret function".format(message_obj.author.display_name))
             return;
 
-        server_name = params[0]
-        channel_name = params[1]
+        server_id = params[0]
+        channel_id = params[1]
         msg = ' '.join(params[2:])
 
         server: discord.Guild = None
 
         guilds = client.guilds
         for guild in guilds:
-            if guild.name.replace(" ", "_") == server_name:
+            if str(guild.id) == server_id:
                 server = guild
                 break
         if server == None:
-            return await message.message_me(client, "Server named '{0}' not found".format(server_name))
+            return await message.message_me(client, "Server with id '{0}' not found".format(server_id))
         
         channel: discord.TextChannel = None
 
         for guild_channel in server.channels:
-            if guild_channel.name.replace(" ", "_") == channel_name:
+            if str(guild_channel.id) == channel_id:
                 channel = guild_channel
         
         if channel == None:
-            return await message.message_me(client, "Channel named '{0}' not found in server: {1}".format(channel_name, server_name))
+            return await message.message_me(client, "Channel with id '{0}' not found in server: {1}".format(channel_id, server.name))
         
         try:
             await channel.send(msg)
