@@ -17,13 +17,15 @@ COMMAND_HANDLERS = {c.__name__.lower(): c()
 COMMAND_LIST = []
 
 for key, value in COMMAND_HANDLERS.items():
-    command_dict = {"name": key, "command": value}
-    COMMAND_LIST.append(command_dict)
+    if not value.secret:
+        command_dict = {"name": key, "command": value}
+        COMMAND_LIST.append(command_dict)
 
 # Register alias
 booty = commands.ass.Ass()
 booty.description = "**.drek booty**: Drek's booty."
 COMMAND_HANDLERS["booty"] = booty
+COMMAND_LIST.append({"name": "booty", "command": booty})
 
 ###############################################################################
 
