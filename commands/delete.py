@@ -8,17 +8,17 @@ import discord
 # but in lowercase
 
 # So, a command class named Random will generate a 'random' command
-class Emote(BaseCommand):
+class Delete(BaseCommand):
 
     def __init__(self):
         # A quick description for the help message
-        description = "Use nitro emotes"
+        description = "See stuff"
         # A list of parameters that the command will take as input
         # Parameters will be separated by spaces and fed to the 'params'
         # argument in the handle() method
         # If no params are expected, leave this list empty or set it to None
-        params = ["emote names"]
-        super().__init__(description, params)
+        params = ["server id", "channel id", "msg id"]
+        super().__init__(description, params, secret=True)
 
     # Override the handle() method
     # It will be called every time the command is received
@@ -33,19 +33,33 @@ class Emote(BaseCommand):
             print("{0} tried to use a secret function".format(message_obj.author.display_name))
             return
 
-        emote_names = params[0:]
+        server_id = params[0]
+        channel_id = params[1]
+        message_id = params[2]
 
-        server: discord.Guild = message_obj.guild
+        server: discord.Guild = None
 
-        channel: discord.TextChannel = message_obj.channel
+        guilds = client.guilds
+        for guild in guilds:
+            if str(guild.id) == server_id:
+                server = guild
+                break
+        if server is None:
+            return await message.message_me(client, "Server with id '{0}' not found".format(server_id))
 
-        emojis = []
-        for emote_name in emote_names:
-            emoji = discord.utils.get(server.emojis, name=emote_name)
-            if emoji:
-                emojis.append(emoji)
-        emoji_strs = [str(emoji) for emoji in emojis]
+        channel: discord.TextChannel = None
+
+        for guild_channel in server.channels:
+            if str(guild_channel.id) == channel_id:
+                channel = guild_channel
+
+        if channel is None:
+            return await message.message_me(client, "Channel with id '{0}' not found in server: {1}".format(channel_id,
+                                                                                                            server.name))
+
         try:
-            await channel.send(' '.join(emoji_strs))
-        except Exception:
-            await channel.send("Emote sending encountered a problem")
+            msg_id = int(message_id)
+            target_message = await channel.fetch_message(msg_id)
+            await target_message.delete()
+        except:
+            await message.message_me(client, "Failed to delete to message")
