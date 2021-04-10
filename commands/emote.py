@@ -29,10 +29,6 @@ class Emote(BaseCommand):
         # 'message' is the discord.py Message object for the command to handle
         # 'client' is the bot Client object
 
-        if message_obj.author.id != constants.MY_USER_ID:
-            print("{0} tried to use a secret function".format(message_obj.author.display_name))
-            return
-
         emote_names = params[0:]
 
         server: discord.Guild = message_obj.guild
