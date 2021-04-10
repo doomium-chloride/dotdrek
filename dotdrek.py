@@ -8,7 +8,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from events.base_event              import BaseEvent
 from events                         import *
 from multiprocessing                import Process
-from helpers import message, updater
+from helpers import message, updater, logging
 
 # Set to remember if the bot is already running, since on_ready may be called
 # more than once on reconnects
@@ -59,6 +59,7 @@ def main():
     # The message handler for both new message and edits
     async def common_handle_message(message):
         text = message.content
+        await logging.log_message(message, client)
         if text.lower().startswith(settings.COMMAND_PREFIX):
             cmd_split = text[len(settings.COMMAND_PREFIX):].split()
             if len(cmd_split) <= 0:
