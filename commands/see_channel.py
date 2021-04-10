@@ -1,6 +1,6 @@
-from commands.base_command  import BaseCommand
-from utils                  import get_emoji
-from helpers                 import message, constants, regex
+from commands.base_command import BaseCommand
+from utils import get_emoji
+from helpers import message, constants, regex
 import discord
 
 
@@ -9,22 +9,22 @@ import discord
 # but in lowercase
 
 # So, a command class named Random will generate a 'random' command
-class Chat(BaseCommand):
+class SeeChannel(BaseCommand):
 
     def __init__(self):
         # A quick description for the help message
-        description = "Sends a message to a channel in a server"
+        description = "See channel"
         # A list of parameters that the command will take as input
-        # Parameters will be separated by spaces and fed to the 'params' 
+        # Parameters will be separated by spaces and fed to the 'params'
         # argument in the handle() method
         # If no params are expected, leave this list empty or set it to None
-        params = ["channel", "message"]
+        params = ["channel id"]
         super().__init__(description, params, secret=True)
 
     # Override the handle() method
     # It will be called every time the command is received
     async def handle(self, params, message_obj: discord.Message, client):
-        # 'params' is a list that contains the parameters that the command 
+        # 'params' is a list that contains the parameters that the command
         # expects to receive, t is guaranteed to have AT LEAST as many
         # parameters as specified in __init__
         # 'message' is the discord.py Message object for the command to handle
@@ -38,10 +38,14 @@ class Chat(BaseCommand):
         msg = ' '.join(params[1:])
 
         channel: discord.TextChannel = client.get_channel(channel_id)
-        
+
         if channel == None:
             return await message.message_me(client, "Channel with id '{0}' not found".format(channel_id))
-        
+
+        embed = discord.Embed(title="Channel info")
+        embed.add_field(name="name", value=str(channel.name))
+        embed.add_field(name="topic", value=str(channel.topic))
+        embed.add_field(name="last message", value=str(channel.last_message))
         try:
             msg = regex.handle_emoji(client.get_emoji, channel.guild.emojis, msg)
             await channel.send(msg)
