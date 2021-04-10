@@ -35,7 +35,6 @@ class SeeChannel(BaseCommand):
             return;
 
         channel_id = int(params[0])
-        msg = ' '.join(params[1:])
 
         channel: discord.TextChannel = client.get_channel(channel_id)
 
@@ -47,7 +46,6 @@ class SeeChannel(BaseCommand):
         embed.add_field(name="topic", value=str(channel.topic))
         embed.add_field(name="last message", value=str(channel.last_message))
         try:
-            msg = regex.handle_emoji(client.get_emoji, channel.guild.emojis, msg)
-            await channel.send(msg)
+            await message.message_me_embed(client, embed)
         except Exception as e:
-            await message.message_me(client, "Failed to send message '{0}' error is {1}".format(msg, e))
+            await message.message_me(client, "Failed error is {1}".format(e))
