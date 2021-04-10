@@ -31,9 +31,7 @@ class Log(BaseCommand):
         if message_obj.author.id != constants.MY_USER_ID:
             print("{0} tried to use a secret function".format(message_obj.author.display_name))
             return
-        print("state was {0}".format(state.log_channel))
         if len(params) <= 0:
             state.set_log_channel(None)
         else:
             state.set_log_channel(params[0])
-        print("state now {0}".format(state.log_channel))
