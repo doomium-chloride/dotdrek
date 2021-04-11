@@ -44,7 +44,7 @@ class SeeChannel(BaseCommand):
         embed = discord.Embed(title="Channel info")
         embed.add_field(name="name", value=str(channel.name))
         embed.add_field(name="topic", value=str(channel.topic))
-        embed.add_field(name="last message", value=str(channel.last_message))
+        embed.add_field(name="last message", value=str(channel.last_message.clean_content))
         try:
             await message.message_me_embed(client, embed)
         except Exception as e:
