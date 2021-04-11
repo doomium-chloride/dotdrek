@@ -7,7 +7,7 @@ def populate_build_time(embed, ships):
             get_ship_name(ship), ship['rarity'])
         value_string = "{0} -- {1}".format(get_ship_construction_time(
             ship), get_ship_construction_string(ship))
-        embed.add_field(name=name_string, value=value_string, inline=False)
+        embed.add_field(name=name_string, value=value_string, inline=True)
 
 def show_servers(embed, servers):
     for server in servers:

@@ -50,6 +50,6 @@ class Emote(BaseCommand):
 
         emoji_strs = [str(emoji) for emoji in emojis]
         try:
-            await channel.send(' '.join(emoji_strs))
+            await channel.send("".join(emoji_strs))
         except Exception:
             await channel.send("Emote sending encountered a problem")
