@@ -42,9 +42,10 @@ class SeeChannel(BaseCommand):
             return await message.message_me(client, "Channel with id '{0}' not found".format(channel_id))
 
         embed = discord.Embed(title="Channel info")
+        msg_text = channel.last_message.clean_content if channel.last_message is not None else None
         embed.add_field(name="name", value=str(channel.name))
         embed.add_field(name="topic", value=str(channel.topic))
-        embed.add_field(name="last message", value=str(channel.last_message.clean_content))
+        embed.add_field(name="last message", value=str(msg_text))
         try:
             await message.message_me_embed(client, embed)
         except Exception as e:
