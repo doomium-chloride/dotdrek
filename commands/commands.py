@@ -18,7 +18,7 @@ class Commands(BaseCommand):
         for cmd in sorted(COMMAND_HANDLERS.items()):
             if(not cmd[1].secret and cmd[1].server == None):
                 msg += "\n" + cmd[1].description
-            elif message.guild != None and message.guild.id == cmd[1].server:
+            elif message.guild != None and message.guild.id == cmd[1].server and not cmd[1].secret:
                 msg += "\n" + cmd[1].description
 
 
