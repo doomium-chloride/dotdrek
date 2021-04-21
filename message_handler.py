@@ -1,5 +1,6 @@
 from commands.base_command  import BaseCommand
 from FuzzySearchPy          import FuzzySearch
+from helpers.constants      import MY_USER_ID
 
 # This, in addition to tweaking __all__ on commands/__init__.py, 
 # imports all classes inside the commands package.
@@ -40,11 +41,12 @@ async def handle_command(command, args, message, bot_client):
     if command not in COMMAND_HANDLERS:
         approx = searcher.search(command)
         if approx == None or len(approx) <= 0:
-            await COMMAND_HANDLERS['commands'].handle([], message, bot_client)
+            await COMMAND_HANDLERS['commands'].handle([], message, bot_client, True)
             return
         else:
             command = approx[0]["name"];
-            await message.channel.send(message.author.mention + " Did you mean: {0}".format(command))
+            suggest = await message.channel.send(message.author.mention + " Did you mean: {0}".format(command))
+            await suggest.delete(delay=5)
 
 
     print(f"{message.author.name}: {settings.COMMAND_PREFIX} {command} "
@@ -52,6 +54,10 @@ async def handle_command(command, args, message, bot_client):
 
     # Retrieve the command
     cmd_obj = COMMAND_HANDLERS[command]
+    if cmd_obj.secret and message.author.id != MY_USER_ID:
+        await COMMAND_HANDLERS['commands'].handle([], message, bot_client, True)
+        return
+
     if cmd_obj.params and len(args) < len(cmd_obj.params):
         await message.channel.send(message.author.mention + " Insufficient parameters!")
     else:

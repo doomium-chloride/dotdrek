@@ -10,7 +10,7 @@ class Commands(BaseCommand):
         params = None
         super().__init__(description, params)
 
-    async def handle(self, params, message, client):
+    async def handle(self, params, message, client, temp=False):
         from message_handler import COMMAND_HANDLERS
         msg = message.author.mention + "\n"
 
@@ -22,4 +22,8 @@ class Commands(BaseCommand):
                 msg += "\n" + cmd[1].description
 
 
-        await message.channel.send(msg)
+        sent_msg = await message.channel.send(msg)
+
+        if temp:
+            await sent_msg.delete(delay=5)
+
