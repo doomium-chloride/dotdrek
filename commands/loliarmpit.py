@@ -21,7 +21,7 @@ class LoliArmpit(BaseCommand):
         # argument in the handle() method
         # If no params are expected, leave this list empty or set it to None
         params = []
-        super().__init__(description, params, server=DIE_JAGER_ID, secret=True)
+        super().__init__(description, params, server=DIE_JAGER_ID, hidden=True)
 
     # Override the handle() method
     # It will be called every time the command is received

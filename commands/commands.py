@@ -16,10 +16,11 @@ class Commands(BaseCommand):
 
         # Displays all descriptions, sorted alphabetically by command name
         for cmd in sorted(COMMAND_HANDLERS.items()):
-            if(not cmd[1].secret and cmd[1].server == None):
-                msg += "\n" + cmd[1].description
-            elif message.guild != None and message.guild.id == cmd[1].server and not cmd[1].secret:
-                msg += "\n" + cmd[1].description
+            command = cmd[1]
+            if(not (command.secret or command.hidden) and command.server == None):
+                msg += "\n" + command.description
+            elif message.guild != None and message.guild.id == command.server and not command.secret:
+                msg += "\n" + command.description
 
 
         sent_msg = await message.channel.send(msg)
