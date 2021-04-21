@@ -17,7 +17,7 @@ class Delete(BaseCommand):
         # Parameters will be separated by spaces and fed to the 'params'
         # argument in the handle() method
         # If no params are expected, leave this list empty or set it to None
-        params = ["server id", "channel id", "msg id"]
+        params = ["channel id", "msg id"]
         super().__init__(description, params, secret=True)
 
     # Override the handle() method
@@ -33,29 +33,16 @@ class Delete(BaseCommand):
             print("{0} tried to use a secret function".format(message_obj.author.display_name))
             return
 
-        server_id = params[0]
-        channel_id = params[1]
-        message_id = params[2]
+        try:
+            channel_id = int(params[0])
+            message_id = int(params[1])
+        except:
+            return await message.message_me(client, "Error parsing int")
 
-        server: discord.Guild = None
+        channel: discord.TextChannel = client.get_channel(channel_id)
 
-        guilds = client.guilds
-        for guild in guilds:
-            if str(guild.id) == server_id:
-                server = guild
-                break
-        if server is None:
-            return await message.message_me(client, "Server with id '{0}' not found".format(server_id))
-
-        channel: discord.TextChannel = None
-
-        for guild_channel in server.channels:
-            if str(guild_channel.id) == channel_id:
-                channel = guild_channel
-
-        if channel is None:
-            return await message.message_me(client, "Channel with id '{0}' not found in server: {1}".format(channel_id,
-                                                                                                            server.name))
+        if channel == None:
+            return await message.message_me(client, "Channel with id '{0}' not found".format(channel_id))
 
         try:
             msg_id = int(message_id)
