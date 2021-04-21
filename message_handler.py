@@ -27,6 +27,10 @@ booty = commands.ass.Ass()
 booty.description = "**.drek booty**: Drek's booty."
 COMMAND_HANDLERS["booty"] = booty
 COMMAND_LIST.append({"name": "booty", "command": booty})
+sasuke = commands.loliarmpit.LoliArmpit()
+sasuke.description = "**.drek sasuke**: sasuke's backstory"
+COMMAND_HANDLERS["sasuke"] = booty
+COMMAND_LIST.append({"name": "sasuke", "command": sasuke})
 
 ###############################################################################
 
