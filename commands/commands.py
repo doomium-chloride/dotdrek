@@ -17,7 +17,7 @@ class Commands(BaseCommand):
         # Displays all descriptions, sorted alphabetically by command name
         for cmd in sorted(COMMAND_HANDLERS.items()):
             command = cmd[1]
-            if(not (command.secret or command.hidden) and command.server == None):
+            if(not command.secret and not command.hidden and command.server == None):
                 msg += "\n" + command.description
             elif message.guild != None and message.guild.id == command.server and not command.secret:
                 msg += "\n" + command.description
