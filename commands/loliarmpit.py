@@ -1,5 +1,4 @@
 from commands.base_command import BaseCommand
-import discord
 from helpers.constants import DIE_JAGER_ID
 
 LOLI_LORE = """The benefits of a guild don't compensate the effort I've been putting in frankly. 
