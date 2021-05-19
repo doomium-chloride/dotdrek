@@ -1,5 +1,4 @@
 from commands.base_command import BaseCommand
-from helpers.constants import DIE_JAGER_ID
 
 LOLI_TRUTH = """The benefits of a guild don't compensate the effort I've been putting in frankly (since i have a massive ego and want my penis stroked every time i do something for the guild).
 With Vier as leader I don't see the guild lasting long so I'm jumping ship (spee cult looks so much sexier). I like Vier (i actually love him), I joined because he asked me if I wanted to but he makes rash and poor decisions like stepping down as leader to begin with, wanting to kick certain people, who he choses to make officers and passes off responsibilities to others too often. (vier is such a lazy ass fucker and stupid son of a bitch. he should have gave the leader pos to me and the guild would have been so much better)
@@ -10,7 +9,7 @@ Plus putting up and pretending to get along with a few people (yes becuz i need 
 # but in lowercase
 
 # So, a command class named Random will generate a 'random' command
-class LoliArmpit(BaseCommand):
+class SasukeTruth(BaseCommand):
 
     def __init__(self):
         # A quick description for the help message
@@ -20,7 +19,7 @@ class LoliArmpit(BaseCommand):
         # argument in the handle() method
         # If no params are expected, leave this list empty or set it to None
         params = []
-        super().__init__(description, params, server=DIE_JAGER_ID, hidden=True)
+        super().__init__(description, params, hidden=True)
 
     # Override the handle() method
     # It will be called every time the command is received
