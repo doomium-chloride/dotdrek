@@ -1,5 +1,5 @@
 from commands.base_command  import BaseCommand
-from helpers                import constants, message
+from helpers                import constants, message, emoji
 import discord
 
 
@@ -37,7 +37,7 @@ class React(BaseCommand):
             message_id = int(params[1])
         except:
             return await message.message_me(client, "Error parsing int")
-        emoji_name = params[2]
+        emoji_names = params[2:]
 
         channel: discord.TextChannel = client.get_channel(channel_id)
 
@@ -49,10 +49,9 @@ class React(BaseCommand):
         try:
             msg_id = int(message_id)
             target_message = await channel.fetch_message(msg_id)
-            emoji = discord.utils.get(server.emojis, name=emoji_name)
-            if emoji:
-                await target_message.add_reaction(emoji)
-            else:
-                await message.message_me(client, "No such emoji found")
+            emojis = emoji.get_emojis(client, server, emoji_names)
+            for e in emojis:
+                if e:
+                    await target_message.add_reaction(e)
         except:
             await message.message_me(client, "Failed to react to message")
