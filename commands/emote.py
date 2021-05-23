@@ -1,5 +1,6 @@
+from typing import List
 from commands.base_command  import BaseCommand
-from FuzzySearchPy          import FuzzySearch
+from helpers                import emoji
 import discord
 
 
@@ -35,20 +36,9 @@ class Emote(BaseCommand):
 
         channel: discord.TextChannel = message_obj.channel
 
-        emojis = []
-        server_emojis = [e.name for e in server.emojis]
-        search_options = { "sort": True, "caseSensitive": False }
-        emoji_searcher = FuzzySearch(server_emojis, [], search_options)
-        for emote_name in emote_names:
-            emoji = discord.utils.get(server.emojis, name=emote_name)
-            if emoji is None:
-                possible_emojis = emoji_searcher.search(emote_name)
-                if len(possible_emojis) >= 1:
-                    emoji = discord.utils.get(server.emojis, name=possible_emojis[0])
-            if emoji:
-                emojis.append(emoji)
+        emojis = emoji.get_emojis(client, server, emote_names)
 
-        emoji_strs = [str(emoji) for emoji in emojis]
+        emoji_strs: List[str] = [str(e) for e in emojis]
         try:
             await channel.send("".join(emoji_strs))
         except Exception:

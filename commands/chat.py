@@ -43,7 +43,7 @@ class Chat(BaseCommand):
             return await message.message_me(client, "Channel with id '{0}' not found".format(channel_id))
         
         try:
-            msg = regex.handle_emoji(client.get_emoji, channel.guild.emojis, msg)
+            msg = regex.handle_emoji(client.get_emojis, channel.guild.emojis, msg)
             await channel.send(msg)
         except Exception as e:
             await message.message_me(client, "Failed to send message '{0}' error is {1}".format(msg, e))
