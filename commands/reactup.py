@@ -1,6 +1,6 @@
 import asyncio
 from commands.base_command import BaseCommand
-from helpers import constants, emoji
+from helpers import emoji
 from typing import List
 import discord
 
@@ -33,9 +33,6 @@ class ReactUp(BaseCommand):
 
         channel: discord.TextChannel = message_obj.channel
 
-        if message_obj.author.id != constants.MY_USER_ID:
-            print("{0} tried to use a secret function".format(message_obj.author.display_name))
-            return
         try:
             number_of_messages = max(int(params[0]), 0)
             if number_of_messages > 100:
