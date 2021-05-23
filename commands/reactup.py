@@ -38,6 +38,8 @@ class ReactUp(BaseCommand):
             return
         try:
             number_of_messages = max(int(params[0]), 0)
+            if number_of_messages > 100:
+                number_of_messages = 100
         except:
             return await channel.send("error parsing int")
         emoji_names = params[1:]
