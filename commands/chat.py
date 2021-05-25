@@ -32,18 +32,18 @@ class Chat(BaseCommand):
 
         if message_obj.author.id != constants.MY_USER_ID:
             print("{0} tried to use this secret function".format(message_obj.author.display_name))
-            return;
+            return
 
         channel_id = int(params[0])
         msg = ' '.join(params[1:])
 
         channel: discord.TextChannel = client.get_channel(channel_id)
         
-        if channel == None:
+        if channel is None:
             return await message.message_me(client, "Channel with id '{0}' not found".format(channel_id))
         
         try:
-            msg = regex.handle_emoji(client.get_emojis, channel.guild.emojis, msg)
+            msg = regex.handle_emoji(client.get_emoji, channel.guild.emojis, msg)
             await channel.send(msg)
         except Exception as e:
             await message.message_me(client, "Failed to send message '{0}' error is {1}".format(msg, e))
