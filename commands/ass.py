@@ -1,5 +1,4 @@
 from commands.base_command  import BaseCommand
-import discord
 
 
 # Your friendly example event
