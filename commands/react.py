@@ -10,7 +10,7 @@ import discord
 # but in lowercase
 
 # So, a command class named Random will generate a 'random' command
-class ReactUp(BaseCommand):
+class React(BaseCommand):
 
     def __init__(self):
         # A quick description for the help message
