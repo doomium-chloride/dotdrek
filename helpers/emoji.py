@@ -45,3 +45,23 @@ def get_emojis_from_server(server):
         return []
     server: discord.Guild = server
     return [{"name": e.name, "emoji": e} for e in server.emojis]
+
+
+async def remove_reactions(reactions_to_clear, user):
+    for react in reactions_to_clear:
+        msg: discord.Message = react[0]
+        reaction: discord.Emoji = react[1]
+        try:
+            await msg.remove_reaction(reaction, user)
+        except:
+            # do nothing message was probably deleted
+            pass
+
+
+def has_reaction(message, reaction):
+    message: discord.Message
+    reaction: discord.Emoji
+    for react in message.reactions:
+        if react.emoji == reaction:
+            return True
+    return False

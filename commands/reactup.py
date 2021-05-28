@@ -50,30 +50,11 @@ class ReactUp(BaseCommand):
         for msg in messages:
             emote_list: List[discord.Emoji] = emoji.get_emojis(client, server, emoji_names)
             for emote in emote_list:
-                if not has_reaction(msg, emote):
+                if not emoji.has_reaction(msg, emote):
                     reactions_to_clear.append((msg, emote))
                     await msg.add_reaction(emote)
 
         await asyncio.sleep(10)
 
-        await remove_reactions(reactions_to_clear, client.user)
+        await emoji.remove_reactions(reactions_to_clear, client.user)
 
-
-async def remove_reactions(reactions_to_clear, user):
-    for react in reactions_to_clear:
-        msg: discord.Message = react[0]
-        reaction: discord.Emoji = react[1]
-        try:
-            await msg.remove_reaction(reaction, user)
-        except:
-            # do nothing message was probably deleted
-            pass
-
-
-def has_reaction(message, reaction):
-    message: discord.Message
-    reaction: discord.Emoji
-    for react in message.reactions:
-        if react.emoji == reaction:
-            return True
-    return False
