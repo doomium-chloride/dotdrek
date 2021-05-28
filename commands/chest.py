@@ -8,7 +8,8 @@ COOMUNITY_CHEST = (
     "https://cdn.discordapp.com/attachments/823836976893526026/827307492073013268/illust_86496469_20210402_103030.png",
     "https://cdn.discordapp.com/attachments/745929580279234560/825226829841301504/d322e8be86a42144d966fe53a0ad4191_1.jpg",
     "https://cdn.discordapp.com/attachments/823836976893526026/823841926226640906/83088295_p1_master1200.png",
-    "https://cdn.discordapp.com/attachments/823836976893526026/823841267455885312/84188422_p0.png"
+    "https://cdn.discordapp.com/attachments/823836976893526026/823841267455885312/84188422_p0.png",
+    "https://cdn.discordapp.com/attachments/823824715437178890/847756725696462858/u0duk3dbzs171.png"
 )
 
 
