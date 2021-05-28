@@ -1,16 +1,8 @@
 from commands.base_command import BaseCommand
+from helpers import web_request
 import random
 
-COOMUNITY_CHEST = (
-    "https://cdn.discordapp.com/attachments/823836976893526026/845914224589144064/Drek1494739.png",
-    "https://cdn.discordapp.com/attachments/823824715437178890/846675204045275146/a3fd2926375e9bcf2f7951c9fead7ca7.png",
-    "https://cdn.discordapp.com/attachments/823836976893526026/831825061551800360/drake_azur_lane_drawn_by_vayneeeee__sample-132aaad7996c900e88d91fb8b4ccb844.png",
-    "https://cdn.discordapp.com/attachments/823836976893526026/827307492073013268/illust_86496469_20210402_103030.png",
-    "https://cdn.discordapp.com/attachments/745929580279234560/825226829841301504/d322e8be86a42144d966fe53a0ad4191_1.jpg",
-    "https://cdn.discordapp.com/attachments/823836976893526026/823841926226640906/83088295_p1_master1200.png",
-    "https://cdn.discordapp.com/attachments/823836976893526026/823841267455885312/84188422_p0.png",
-    "https://cdn.discordapp.com/attachments/823824715437178890/847756725696462858/u0duk3dbzs171.png"
-)
+CHEST_LINK = "https://raw.githubusercontent.com/doomium-chloride/dotdrek/master/Assets/json/drek_pics.json"
 
 
 class Chest(BaseCommand):
@@ -34,4 +26,6 @@ class Chest(BaseCommand):
         # 'message' is the discord.py Message object for the command to handle
         # 'client' is the bot Client object
 
-        await message.channel.send(random.choice(COOMUNITY_CHEST))
+        coomunity_chest = web_request.fetch_json(CHEST_LINK)
+
+        await message.channel.send(random.choice(coomunity_chest))
