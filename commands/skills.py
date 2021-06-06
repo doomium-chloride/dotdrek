@@ -1,6 +1,4 @@
 from commands.base_command  import BaseCommand
-from utils                  import get_emoji
-from random                 import randint
 from helpers                import ships, colours
 import discord
 
@@ -54,7 +52,8 @@ class Skills(BaseCommand):
                     else:
                         title="{0}'s skill: {1}"
                     embed = discord.Embed(title=title.format(ship_name, skill['names']['en']), color=colours.get_discord_colour(skill['color']), description=skill['description'])
-                    embed.set_thumbnail(url=skill['icon'])
+                    skill_img = skill['icon'].replace('?','%3F')
+                    embed.set_thumbnail(url=skill_img)
                     await message.channel.send(embed=embed)
                 
                 

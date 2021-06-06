@@ -20,8 +20,7 @@ async def update_azurapi(client, forced=False):
     # forced means no checking
     if forced:
         await clear_version(client, "cleared azurapi version")
-        api.updater.updateShipsData()
-        api.updater.updateEquipmentsData()
+        api.updater.update(True)
         print("force updated")
         await message_me(client, "force updated")
         return
@@ -33,6 +32,6 @@ async def update_azurapi(client, forced=False):
         update_msg = "AzurApi updating from: {0}".format(api.getVersion())
         print("Updating", update_msg)
         await clear_version(client, update_msg)
-        api.updater.update()
+        api.updater.update(True)
     else:
         print("No update required for Azur Api")
