@@ -43,9 +43,5 @@ class MangoFlex(BaseCommand):
         # 'message' is the discord.py Message object for the command to handle
         # 'client' is the bot Client object
 
-        if message.channel.guild not in DIE_JAGER_SERVERS:
-            await message.channel.send(":grape:")
-            return
-
         for link in mango_flexes:
             await message.channel.send(link)
