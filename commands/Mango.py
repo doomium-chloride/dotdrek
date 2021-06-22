@@ -1,4 +1,4 @@
-from commands.base_command  import BaseCommand
+from commands.base_command import BaseCommand
 
 mango_farewell = """August 26, 2020 - June 21, 2021 
 My last flex <:mutsukipog:793343586732212234> 
@@ -7,6 +7,7 @@ Thank you guys for having me apart of this guild, I really enjoyed being able to
 
 mango_reason = """The main reason is going to be working full time in 2 weeks while prepping for applications, with summer break now for me I thought that I should really reprioritize what I do… I have thought of quitting before since AL started to feel like a chore… like I know I can log in warrior this game, but I guess I just want to break out of the habit of having to login to a game everyday <:Sadge:804605195170349057>
 If anyone wants my account for free dm me, I put quite a lot of money into this game so I want to make sure this acc goes to someone I can trust"""
+
 
 # Your friendly example event
 # Keep in mind that the command name will be derived from the class name
