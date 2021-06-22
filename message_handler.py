@@ -48,7 +48,7 @@ async def handle_command(command, args, message, bot_client):
             await COMMAND_HANDLERS['commands'].handle([], message, bot_client, True)
             return
         else:
-            command = approx[0]["name"];
+            command = approx[0]["name"]
             suggest = await message.channel.send(message.author.mention + " Did you mean: {0}".format(command))
             await suggest.delete(delay=5)
 

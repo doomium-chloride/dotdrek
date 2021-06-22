@@ -1,4 +1,5 @@
 from commands.base_command import BaseCommand
+from helpers.constants import DIE_JAGER_SERVERS
 
 mango_flexes = (
     "https://cdn.discordapp.com/attachments/823824715437178890/856800903418871838/Player_Card.png",
@@ -25,13 +26,13 @@ class MangoFlex(BaseCommand):
 
     def __init__(self):
         # A quick description for the help message
-        description = "Mango, a retired Die Jäger member"
+        description = "Mango's final flex'"
         # A list of parameters that the command will take as input
         # Parameters will be separated by spaces and fed to the 'params' 
         # argument in the handle() method
         # If no params are expected, leave this list empty or set it to None
         params = []
-        super().__init__(description, params)
+        super().__init__(description, params, server=DIE_JAGER_SERVERS)
 
     # Override the handle() method
     # It will be called every time the command is received
@@ -41,6 +42,9 @@ class MangoFlex(BaseCommand):
         # parameters as specified in __init__
         # 'message' is the discord.py Message object for the command to handle
         # 'client' is the bot Client object
+
+        if message.channel.guild not in DIE_JAGER_SERVERS:
+            return
 
         for link in mango_flexes:
             await message.channel.send(link)

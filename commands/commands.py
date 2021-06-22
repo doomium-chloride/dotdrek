@@ -20,10 +20,16 @@ class Commands(BaseCommand):
             visible = not command.secret and not command.hidden
             if visible and command.server is None:
                 msg += "\n" + command.description
-            elif message.guild is not None and message.guild.id == command.server and visible:
+            elif message.guild is not None and message.guild.id in command.server and visible:
                 msg += "\n" + command.description
 
         sent_msg = await message.channel.send(msg)
 
         if temp:
             await sent_msg.delete(delay=5)
+
+
+def allowed_server(this_server, server_list):
+    if server_list is None:
+        return True
+    return this_server in server_list

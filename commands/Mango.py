@@ -1,4 +1,5 @@
 from commands.base_command import BaseCommand
+from helpers.constants import DIE_JAGER_SERVERS
 
 mango_farewell = """August 26, 2020 - June 21, 2021 
 My last flex <:mutsukipog:793343586732212234> 
@@ -24,7 +25,7 @@ class Mango(BaseCommand):
         # argument in the handle() method
         # If no params are expected, leave this list empty or set it to None
         params = []
-        super().__init__(description, params)
+        super().__init__(description, params, server=DIE_JAGER_SERVERS)
 
     # Override the handle() method
     # It will be called every time the command is received
@@ -34,6 +35,9 @@ class Mango(BaseCommand):
         # parameters as specified in __init__
         # 'message' is the discord.py Message object for the command to handle
         # 'client' is the bot Client object
+
+        if message.channel.guild not in DIE_JAGER_SERVERS:
+            return
 
         await message.channel.send(mango_farewell)
         await message.channel.send(mango_reason)
