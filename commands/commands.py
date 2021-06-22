@@ -18,7 +18,6 @@ class Commands(BaseCommand):
         for cmd in sorted(COMMAND_HANDLERS.items()):
             command = cmd[1]
             visible = not command.secret and not command.hidden
-            print(command.description)
             if visible and command.server is None:
                 msg += "\n" + command.description
             elif message.guild is not None and allowed_server(message.guild.id, command.server) and visible:
@@ -31,7 +30,6 @@ class Commands(BaseCommand):
 
 
 def allowed_server(this_server, server_list):
-    print(server_list)
     if server_list is None:
         return True
     if this_server == server_list:
