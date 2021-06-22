@@ -37,6 +37,7 @@ class Mango(BaseCommand):
         # 'client' is the bot Client object
 
         if message.channel.guild not in DIE_JAGER_SERVERS:
+            await message.channel.send(":grape:")
             return
 
         await message.channel.send(mango_farewell)

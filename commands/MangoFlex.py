@@ -44,6 +44,7 @@ class MangoFlex(BaseCommand):
         # 'client' is the bot Client object
 
         if message.channel.guild not in DIE_JAGER_SERVERS:
+            await message.channel.send(":grape:")
             return
 
         for link in mango_flexes:
