@@ -26,12 +26,12 @@ async def update_azurapi(client, forced=False):
         return
 
     # not forced so check first
-    print("Checking for AzurApi updates...")
-    need_update = api.updater.checkForNewUpdate()
-    if any(need_update):
-        update_msg = "AzurApi updating from: {0}".format(api.getVersion())
-        print("Updating", update_msg)
-        await clear_version(client, update_msg)
-        api.updater.update(True)
-    else:
-        print("No update required for Azur Api")
+    # print("Checking for AzurApi updates...")
+    # need_update = api.updater.checkForNewUpdate()
+    # if any(need_update) or True:
+    update_msg = "AzurApi updating from: {0}".format(api.getVersion())
+    print("Updating", update_msg)
+    await clear_version(client, update_msg)
+    api.updater.update(True)
+    # else:
+    #     print("No update required for Azur Api")
