@@ -34,7 +34,7 @@ class Skills(BaseCommand):
 
             ship = ships.get_closest_matching_ship(ship_name)
 
-            if ship == None:
+            if ship is None:
                 return await message.channel.send("No ship named '{0}' found".format(ship_name))
             
             ship_name = ship['names']['en']
