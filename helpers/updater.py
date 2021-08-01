@@ -8,16 +8,19 @@ old_message = ""
 
 
 async def clear_version(client, update_msg):
+    global old_message
     try:
         os.remove(azurapi_version)
-        await message_me(client, update_msg)
+        if old_message != update_msg:
+            await message_me(client, update_msg)
+        old_message = update_msg
     except OSError as e:
         print("Error: %s - %s." % (e.filename, e.strerror))
         await message_me(client, "Version couldn't be cleared when updating...")
 
 
 async def update_azurapi(client, forced=False):
-    global old_message
+
     api = AzurAPI()
 
     # forced means no checking
@@ -33,9 +36,7 @@ async def update_azurapi(client, forced=False):
     # need_update = api.updater.checkForNewUpdate()
     # if any(need_update) or True:
     update_msg = "AzurApi updating from: {0}".format(api.getVersion())
-    if old_message != update_msg:
-        print("Updating", update_msg)
-    old_message = update_msg
+    print("Updating", update_msg)
     await clear_version(client, update_msg)
     api.updater.update(True)
     # else:
