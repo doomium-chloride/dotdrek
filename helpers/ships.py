@@ -144,6 +144,8 @@ def find_skills(skill_name):
     skills = []
     for ship in ships:
         for skill in ship["skills"]:
+            en_name = skill["names"]["en"]
+            skill["names"]["en"] = en_name.replace("(Retrofit) ", "")
             skills.append(skill)
     options = {"sort": True, "caseSensitive": False}
     keys = ["names.en", "names.jp", "names.cn", "names.kr"]
@@ -166,6 +168,6 @@ def dumb_search_ship_by_skill(skill_name):
     results = []
     for ship in ships:
         for skill in ship["skills"]:
-            if skill["names"]["en"] == skill_name:
+            if skill["names"]["en"].replace("(Retrofit) ", "") == skill_name:
                 results.append(ship)
     return results
