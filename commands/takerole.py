@@ -29,7 +29,7 @@ class TakeRole(BaseCommand):
         # 'message' is the discord.py Message object for the command to handle
         # 'client' is the bot Client object
 
-        if message.guild == None or message.guild.id != self.server:
+        if message.guild is None or message.guild.id not in self.server:
             return
 
         role_name = ' '.join(params)
@@ -39,12 +39,12 @@ class TakeRole(BaseCommand):
 
         role_id = DREK_ROLES.get(role_name)
 
-        if role_id == None:
+        if role_id is None:
             return
         
         role = get_role(role_id)
 
-        if role == None:
+        if role is None:
             return
 
         await member.remove_roles(role, atomic=True)
