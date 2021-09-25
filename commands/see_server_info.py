@@ -47,7 +47,7 @@ class SeeServerInfo(BaseCommand):
 
         embed = discord.Embed(title="Server info: {0}".format(server.name))
         embed.add_field(name="member count", value=server.member_count)
-        if server.icon:
+        if server.icon_url:
             embed.set_thumbnail(url=server.icon_url)
         try:
             await message.message_me_embed(client, embed)
