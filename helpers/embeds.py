@@ -22,16 +22,6 @@ def show_servers(embed, servers):
         server_id = server.id
         embed.add_field(name=server_name, value=server_id, inline=True)
 
-def show_server_emotes(embed, servers):
-    for server in servers:
-        server_name = server.name
-        emoji_strs = [str(e) for e in server.emojis]
-        server_emotes = "".join(emoji_strs)
-        if server_emotes:
-            embed.add_field(name=server_name, value=server_emotes, inline=True)
-        else:
-            embed.add_field(name=server_name, value="No emotes", inline=True)
-
 def split_list(array, limit):
     return [array[i:i+limit] for i in range(0, len(array), limit)]
 

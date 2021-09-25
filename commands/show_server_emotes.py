@@ -35,8 +35,7 @@ class ShowServerEmotes(BaseCommand):
             return
         servers = client.guilds
 
-        split_list = embeds.split_list(servers, 25)
-        for server_list in split_list:
-            embed = discord.Embed(title="Servers")
-            embeds.show_server_emotes(embed, server_list)
+        for server in servers:
+            emote_list = [str(e) for e in server.emojis]
+            embed = discord.Embed(title="Server: {0}".format(server.name), description="".join(emote_list))
             await message_me_embed(client, embed)
